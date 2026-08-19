@@ -1,0 +1,8 @@
+{
+    "name": "YouTube Duration",
+    "author": "CevvalKoala",
+    "description": "Adds YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API. Uses a local cache and configurable system-wide formatting.",
+    "version": "2.0.1",
+    "entrypoint": "YouTubeDuration",
+    "type": "system"
+}

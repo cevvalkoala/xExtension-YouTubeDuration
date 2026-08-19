@@ -1,0 +1,69 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var YouTubeDurationExtension $this */
+?>
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+    <input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+    <div class="form-group">
+        <label class="group-name" for="youtube-api-key">YouTube Data API key</label>
+        <div class="group-controls">
+            <input
+                type="password"
+                name="api_key"
+                id="youtube-api-key"
+                value="<?= htmlspecialchars($this->apiKey, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
+                autocomplete="off"
+                size="60"
+            />
+            <p class="form-help">
+                Create a YouTube Data API v3 key in Google Cloud and paste it here.
+                This is stored in FreshRSS's system extension configuration.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <span class="group-name">Duration placement</span>
+        <div class="group-controls">
+            <label>
+                <input type="radio" name="duration_position" value="before" <?= $this->durationPosition === 'before' ? 'checked' : '' ?> />
+                Before title: <code>[12:34] Video title</code>
+            </label>
+            <br />
+            <label>
+                <input type="radio" name="duration_position" value="after" <?= $this->durationPosition === 'after' ? 'checked' : '' ?> />
+                After title: <code>Video title [12:34]</code>
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <span class="group-name">YouTube Shorts</span>
+        <div class="group-controls">
+            <label>
+                <input type="radio" name="shorts_mode" value="shorts" <?= $this->shortsMode === 'shorts' ? 'checked' : '' ?> />
+                Mark Shorts as <code>[Shorts]</code>
+            </label>
+            <br />
+            <label>
+                <input type="radio" name="shorts_mode" value="duration" <?= $this->shortsMode === 'duration' ? 'checked' : '' ?> />
+                Show the duration of Shorts
+            </label>
+            <br />
+            <label>
+                <input type="radio" name="shorts_mode" value="none" <?= $this->shortsMode === 'none' ? 'checked' : '' ?> />
+                Do not add anything to Shorts
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group form-actions">
+        <div class="group-controls">
+            <button type="submit" class="btn btn-important">Save</button>
+            <button type="reset" class="btn">Cancel</button>
+        </div>
+    </div>
+</form>
