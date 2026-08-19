@@ -3,6 +3,7 @@ FreshRSS extension that adds YouTube video duration or Shorts markers to new You
 
 ## This extension is built completely via AI.
 I don't know much about FreshRSS extensions and I'm just a novice with PHP. So, I won't claim that I thoroughly understand how it works. But I tested it on my personal single-user FreshRSS setup for weeks without issues.
+
 I understand most people have reservations about using slopcoded applications. Still, feel free to analyze, use, debug, revise, or otherwise comment on the code. The code is yours, hoping it will make your RSS setup a bit more useful.
 
 ## What it does
@@ -38,9 +39,13 @@ chown -R www-data:www-data xExtension-YouTubeDuration
 2. Find **YouTube Duration** in the list and click **Enable**.
 3. Click on the gears icon next to the extension's name, to open its configuration page.
 4. Enter the Youtube Data API Key you obtained from Google Cloud Dashboard.
+
    4.1. Create a new project at https://console.cloud.google.com
+   
    4.2. Proceed to APIs & Services, Enable APIs and services. YouTube Data API v3 should be enabled. For personal use, the quota Google gives you (10K queries a day) should be more than sufficient. Also, the extension caches video queries, so that a given video is queried only once.
+   
    4.3. Create the API key on the "Credentials" page under "APIs & Services".
+   
 5. Check out the other few options provided.
 6. Click "Save".
 7. Return to your feeds. The next time a Youtube feed item appears in one of your Youtube feeds, its duration will be shown in the title. Mobile RSS apps such as Capy Reader or Feedme will also show the title with duration.
