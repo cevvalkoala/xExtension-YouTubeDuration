@@ -1,4 +1,4 @@
-# YouTubeDuration
+# YouTube Duration
 FreshRSS extension that adds YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API. Uses a local cache and configurable system-wide formatting. It uses a free YouTube Data v3 API Key you can get from your Google Cloud Dashboard.
 
 ## This extension is built completely via AI.
