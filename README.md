@@ -5,6 +5,13 @@ FreshRSS extension that adds YouTube video duration or Shorts markers to new You
 I don't know much about FreshRSS extensions and I'm just a novice with PHP. So, I won't claim that I thoroughly understand how it works. But I tested it on my personal single-user FreshRSS setup for weeks without issues.
 I understand most people have reservations about using slopcoded applications. Still, feel free to analyze, use, debug, revise, or otherwise comment on the code. The code is yours, hoping it will make your RSS setup a bit more useful.
 
+## What it does
+Say, you're subscribed to Sabine Hossenfelder's YouTube channel via RSS. Then she published this video:
+https://www.youtube.com/watch?v=BvlGs25tCxI
+It would normally appear as "The War on AI Has Begun" in your feed list.
+However, with this extension, the feed item title would read "[06:51] The War on AI Has Begun"
+Also, if the video was a Shorts, the extension would label it as such, if you chose that option. It can help if you want to automatically make Shorts "read", like I do.
+
 ## Installation
 Assuming you already have a running FreshRSS instance, installing the extension is just about dropping its folder into FreshRSS's `extensions/` directory and enabling it from the web UI.
 
