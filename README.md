@@ -28,7 +28,7 @@ The goal is to have the extension's files at `<FreshRSS>/extensions/xExtension-Y
 ```bash
 cd /.../FreshRSS/extensions
 # or depending on your setup, /.../FreshRSS/public/extensions
-sudo git clone https://github.com/cevvalkoala/xExtension-YouTubeDuration.git
+sudo git clone https://github.com/cevvalkoala/xExtension-YouTubeDuration
 # make sure the web server user can read it (skip if not applicable)
 sudo chown -R www-data:www-data xExtension-YouTubeDuration
 ```
