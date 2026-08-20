@@ -23,15 +23,14 @@ Assuming you already have a running FreshRSS instance, installing the extension 
 
 ### 1. Put the files in place
 
-The goal is to have the extension's files at `<FreshRSS>/extensions/xExtension-YouTubeDuration/`.
+The goal is to have the extension's files at `<FreshRSS>/extensions/xExtension-YouTubeDuration/`:
 
-The following should also work, but I am not sure if I was able to create the required repository:
 ```bash
 cd /.../FreshRSS/extensions
 # or depending on your setup, /.../FreshRSS/public/extensions
-git clone https://github.com/cevvalkoala/xExtension-YouTubeDuration.git
+sudo git clone https://github.com/cevvalkoala/xExtension-YouTubeDuration.git
 # make sure the web server user can read it (skip if not applicable)
-chown -R www-data:www-data xExtension-YouTubeDuration
+sudo chown -R www-data:www-data xExtension-YouTubeDuration
 ```
 
 ### 2. Enable it in FreshRSS
