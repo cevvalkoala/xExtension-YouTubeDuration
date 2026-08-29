@@ -59,6 +59,11 @@ final class YouTubeDurationService
             return $entry;
         }
 
+        if ($this->durationPosition === 'summary') {
+            $entry->_content($this->applySummaryMarker($entry->content(), $marker));
+            return $entry;
+        }
+
         $entry->_title($this->applyMarker($originalTitle, $marker));
         return $entry;
     }
@@ -221,6 +226,22 @@ final class YouTubeDurationService
             return $title . ' ' . $marker;
         }
         return $marker . ' ' . $title;
+    }
+
+    /**
+     * Put the marker on its own rendered line before the existing summary.
+     *
+     * The marker is deliberately placed before the existing HTML rather than
+     * being inserted into the first existing HTML element. This means the
+     * original summary HTML remains untouched.
+     */
+    private function applySummaryMarker(string $content, string $marker): string
+    {
+        if ($marker === '') {
+            return $content;
+        }
+
+        return $marker . '<br />' . $content;
     }
 
     private function readCache(): array

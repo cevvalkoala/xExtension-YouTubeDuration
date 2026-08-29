@@ -34,7 +34,10 @@ final class YouTubeDurationExtension extends Minz_Extension
 
         if (Minz_Request::isPost()) {
             $apiKey = trim(Minz_Request::paramString('api_key'));
-            $durationPosition = Minz_Request::paramString('duration_position') === 'after' ? 'after' : 'before';
+            $durationPosition = Minz_Request::paramString('duration_position');
+            if (!in_array($durationPosition, ['before', 'after', 'summary'], true)) {
+                $durationPosition = 'before';
+            }
             $shortsMode = Minz_Request::paramString('shorts_mode');
             if (!in_array($shortsMode, ['shorts', 'duration', 'none'], true)) {
                 $shortsMode = 'shorts';
@@ -72,7 +75,7 @@ final class YouTubeDurationExtension extends Minz_Extension
         $this->durationPosition = $this->getSystemConfigurationString('duration_position') ?: 'before';
         $this->shortsMode = $this->getSystemConfigurationString('shorts_mode') ?: 'shorts';
 
-        if (!in_array($this->durationPosition, ['before', 'after'], true)) {
+        if (!in_array($this->durationPosition, ['before', 'after', 'summary'], true)) {
             $this->durationPosition = 'before';
         }
         if (!in_array($this->shortsMode, ['shorts', 'duration', 'none'], true)) {

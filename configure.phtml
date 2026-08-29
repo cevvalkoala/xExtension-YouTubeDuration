@@ -32,10 +32,13 @@ declare(strict_types=1);
                 <input type="radio" name="duration_position" value="before" <?= $this->durationPosition === 'before' ? 'checked' : '' ?> />
                 Before title: <code>[12:34] Video title</code>
             </label>
-            <br />
             <label>
                 <input type="radio" name="duration_position" value="after" <?= $this->durationPosition === 'after' ? 'checked' : '' ?> />
                 After title: <code>Video title [12:34]</code>
+            </label>
+            <label>
+                <input type="radio" name="duration_position" value="summary" <?= $this->durationPosition === 'summary' ? 'checked' : '' ?> />
+                Beginning of summary: <code>[12:34]</code>
             </label>
         </div>
     </div>
@@ -47,12 +50,10 @@ declare(strict_types=1);
                 <input type="radio" name="shorts_mode" value="shorts" <?= $this->shortsMode === 'shorts' ? 'checked' : '' ?> />
                 Mark Shorts as <code>[Shorts]</code>
             </label>
-            <br />
             <label>
                 <input type="radio" name="shorts_mode" value="duration" <?= $this->shortsMode === 'duration' ? 'checked' : '' ?> />
                 Show the duration of Shorts
             </label>
-            <br />
             <label>
                 <input type="radio" name="shorts_mode" value="none" <?= $this->shortsMode === 'none' ? 'checked' : '' ?> />
                 Do not add anything to Shorts
