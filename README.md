@@ -42,7 +42,7 @@ sudo chown -R www-data:www-data xExtension-YouTubeDuration
 
    4.1. Create a new project at https://console.cloud.google.com
    
-   4.2. Proceed to APIs & Services, Enable APIs and services. YouTube Data API v3 should be enabled. For personal use, the quota Google gives you (10K queries a day) should be more than sufficient. Also, the extension caches video queries, so that a given video is queried only once.
+   4.2. Proceed to APIs & Services, Enable APIs and services. YouTube Data API v3 should be enabled. For personal use, the quota Google gives you (10K queries a day) should be more than sufficient. The extension caches successful video queries, but failed lookups or cache writes may cause a video to be queried again.
    
    4.3. Create the API key on the "Credentials" page under "APIs & Services".
    
@@ -50,5 +50,7 @@ sudo chown -R www-data:www-data xExtension-YouTubeDuration
 6. Click "Save".
 7. Return to your feeds. The next time a Youtube feed item appears in one of your Youtube feeds, its duration will be shown in the title. Mobile RSS apps such as Capy Reader or Feedme will also show the title with duration.
 8. Existing Youtube feed items will not be affected. Feel free to come up with a backfill utility to check the existing items in your existing Youtube feeds. I didn't want to slopcode a small script to go over my existing feeds database.
+
+The cache is stored in `youtube-duration-cache.json` under FreshRSS's `DATA_PATH` (normally `<FreshRSS>/data`). The PHP process needs write permission there; cache filesystem failures are logged. The previous hard-coded cache location is not imported, so the cache will rebuild after updating and may temporarily use additional API quota.
 
 To update at a later time, I guess `git pull` inside the folder (or re‑copy the files) and hard‑refresh would do the trick.

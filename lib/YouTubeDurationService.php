@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 final class YouTubeDurationService
 {
-    private const CACHE_FILE = '/var/www/freshrss/public/data/youtube-duration-cache.json';
+    private const CACHE_FILE = DATA_PATH . '/youtube-duration-cache.json';
     private const HTTP_TIMEOUT_SECONDS = 10;
     private const MAX_API_IDS_PER_REQUEST = 50;
 
@@ -138,7 +138,7 @@ final class YouTubeDurationService
 
             $response = curl_exec($curlHandle);
             $httpStatus = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-            curl_close($curlHandle);
+            unset($curlHandle);
 
             if ($response === false || $httpStatus !== 200) {
                 error_log('YouTube Duration extension: YouTube API request failed with HTTP status ' . $httpStatus);
@@ -190,8 +190,9 @@ final class YouTubeDurationService
         }
 
         $directory = dirname(self::CACHE_FILE);
-        if (!is_dir($directory)) {
-            @mkdir($directory, 0775, true);
+        if (!is_dir($directory) && !@mkdir($directory, 0775, true) && !is_dir($directory)) {
+            error_log('YouTube Duration extension: failed to create cache directory: ' . $directory);
+            return;
         }
 
         $json = json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -200,8 +201,12 @@ final class YouTubeDurationService
         }
 
         $temporaryFile = self::CACHE_FILE . '.tmp';
-        if (@file_put_contents($temporaryFile, $json . PHP_EOL) !== false) {
-            @rename($temporaryFile, self::CACHE_FILE);
+        if (@file_put_contents($temporaryFile, $json . PHP_EOL) === false) {
+            error_log('YouTube Duration extension: failed to write cache file: ' . $temporaryFile);
+            return;
+        }
+        if (!@rename($temporaryFile, self::CACHE_FILE)) {
+            error_log('YouTube Duration extension: failed to rename cache file: ' . $temporaryFile);
         }
     }
 
@@ -250,7 +255,11 @@ final class YouTubeDurationService
             return [];
         }
         $json = @file_get_contents(self::CACHE_FILE);
-        if ($json === false || $json === '') {
+        if ($json === false) {
+            error_log('YouTube Duration extension: failed to read cache file: ' . self::CACHE_FILE);
+            return [];
+        }
+        if ($json === '') {
             return [];
         }
         $cache = json_decode($json, true);
